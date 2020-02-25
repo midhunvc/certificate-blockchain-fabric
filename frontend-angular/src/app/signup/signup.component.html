@@ -1,0 +1,76 @@
+<div class="row">
+    <div class="col-xs-12 col-md-6 col-md-offset-3">
+
+
+        <br>
+        <br>
+
+
+        
+
+        <br>
+
+        <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
+       
+          <div class="form-group">
+<h2>Register as Student </h2>
+
+          </div>
+
+
+          <div class="form-group">
+            <label for="role">Role</label>
+            <input type="text" class="form-control" ngModel  name="role" required />
+    </div>
+
+        <div class="form-group">
+                <label for="fname">FirstName</label>
+                <input type="text" class="form-control"  ngModel name="fname" required />
+        </div>
+
+
+        <div class="form-group">
+                <label for="mname">MiddleName</label>
+                <input type="text" class="form-control" ngModel name="mname" required />
+            </div>
+
+            
+            <div class="form-group">
+                <label for="lname">LastName</label>
+                <input type="text"  class="form-control" ngModel name="lname" required />
+                </div>
+
+
+                <div class="form-group">
+          <label for="email">E-Mail</label>
+          <input type="email" id="email" class="form-control" ngModel name="email" required  email/>
+        </div>
+
+        <div class="form-group">
+          <label for="num">Number</label>
+          <input type="text" class="form-control" ngModel name="num" required  />
+        </div>
+
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" class="form-control" ngModel name="password" minlength="6" />
+        </div>
+
+      
+
+
+        <div>
+          <button class="btn btn-primary" type="submit">Submit</button> <br>
+        </div>
+
+        <div>
+          Not registed?<a href="" class="text-light" routerLinkActive="active" [routerLink]="['/signupcmpny']">Register as company</a>
+            </div>
+
+
+      </form>
+
+
+    </div>
+  </div>

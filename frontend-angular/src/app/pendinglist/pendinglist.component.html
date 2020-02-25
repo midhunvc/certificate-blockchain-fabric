@@ -1,0 +1,72 @@
+
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Certificates</a>
+      </div>
+      
+  
+
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          
+          <li ><a routerLinkActive="active" [routerLink]="['/pendinglist']">Pending List<span class="sr-only">(current)</span></a></li>
+          <li ><a routerLinkActive="active" [routerLink]="['/approvedlist']">Approved List<span class="sr-only">(current)</span></a></li>
+        </ul>
+   
+      </div>
+    </div>
+  </nav>
+
+
+  <br><br>
+<div class="card-header border-0">
+  <div class="col text-left">
+              <h4>PENDING REQUEST</h4>
+
+        
+
+             
+            </div> 
+          </div>
+
+<br>
+
+<table class="table align-items-center table-flush">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Age</th>
+        <th scope="col">Email</th>
+        <th scope="col">Provider</th>
+        <th scope="col">Owner</th>
+        <th scope="col">Type</th>
+       
+      </tr>
+    </thead>
+
+
+
+
+    <tbody>
+          <tr *ngFor="let details of detailss">
+            <td>{{details.name}}</td>
+            <td>{{details.age}}</td>
+            <td>{{details.email}}</td>
+            <td>{{details.provider}}</td>
+            <td>{{details.owner}}</td>
+            <td>{{details.type}}</td>
+
+            <td>
+              <button (click)="det(details.name,details.age,details.email,details.provider,details.owner,details.type)" class= "btn btn-success">Approve</button>
+          </td>
+           </tr>
+        </tbody>
+</table>

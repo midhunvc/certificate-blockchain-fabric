@@ -1,0 +1,72 @@
+{
+    "status": "200",
+    "message": "Success",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODEzNTIyMDQsInVzZXJuYW1lIjoidWx0c0BnbWFpbC5jb20iLCJuYW1lIjpudWxsLCJvcmdOYW1lIjoiVmVyaWZpZXIiLCJyb2xlIjoiY29tcGFueSIsImlhdCI6MTU4MTMxNjIwNH0.CdyG2C54rloTk-N3t_zW_cGnfcgnzkkXnn4J-DLNpJE",
+    "role": "company"
+}
+{
+    "status": "200",
+    "message": "Success",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODEzNTIxNzksInVzZXJuYW1lIjoiaml0aEBnbWFpbC5jb20iLCJuYW1lIjoiaml0aHZjIiwib3JnTmFtZSI6IkNQQSIsInJvbGUiOiJzdHVkZW50IiwiaWF0IjoxNTgxMzE2MTc5fQ.VuRUrNZqdhDBB_Amc3G8bnotBJDbj6eC2at7bQVUnu8",
+    "role": "student"
+}
+{
+    "status": "200",
+    "message": "Success",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODEzNTIxNjIsInVzZXJuYW1lIjoiYWRtaW5AZ21haWwuY29tIiwibmFtZSI6bnVsbCwib3JnTmFtZSI6IkNQQSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTU4MTMxNjE2Mn0.PMOW1rlmspLFMYvJkuqjhK2-gDMBMHPdxm53HgPiE5c",
+    "role": "admin"
+}
+
+
+
+
+
+// approve a certificate
+
+app.post("/approveCertificate", async function(
+  req,
+  res
+) {
+  logger.debug("==================== Generate Certificate ==================");
+  var chaincodeName = def.modules.chaincodeName;
+  var channelName = def.modules.channelName;
+  var fcn = "generateCertificate";
+  var args = req.body.args;//["jithin","20","jc@gmail.com","ktu","jithin","qwerty"]
+  logger.debug("channelName  : " + channelName);
+  logger.debug("chaincodeName : " + chaincodeName);
+  logger.debug("fcn  : " + fcn);
+  logger.debug("args  : " + args);
+  if (!chaincodeName) {
+    res.json(getErrorMessage("'chaincodeName'"));
+    return;
+  }
+  if (!channelName) {
+    res.json(getErrorMessage("'channelName'"));
+    return;
+  }
+  if (!fcn) {
+    res.json(getErrorMessage("'fcn'"));
+    return;
+  }
+  if (!args) {
+    res.json(getErrorMessage("'args'"));
+    return;
+  }
+  let status = await cert.approve(req.body).catch((error)=>{console.log(error)});
+  if(status) {
+
+  let message = await invoke.invokeChaincode(
+    undefined,
+    channelName,
+    chaincodeName,
+    fcn,
+    args,
+    req.username,
+    req.orgname
+  );
+  res.send(message);
+  }
+  else{
+    res.send({"response":"Not satisfying the condition for certificate approval"});
+  }
+});

@@ -1,0 +1,19 @@
+---
+name: "certificationverification-verifier"
+
+x-type: "hlfv1"
+
+description: "Certification Verification Management Network - client definition for verifier"
+
+version: "1.0"
+
+client:
+  organization: Verifier
+
+  credentialStore:
+    path: "./fabric-client-kv-verifier"
+
+    cryptoStore:
+      path: "/tmp/fabric-client-kv-verifier"
+
+    wallet: wallet-name

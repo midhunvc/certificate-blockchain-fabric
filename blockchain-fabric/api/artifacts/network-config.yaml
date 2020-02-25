@@ -1,0 +1,129 @@
+---
+name: "certification"
+
+x-type: "hlfv1"
+
+description: "Certificate Verifying Network"
+
+version: "1.0"
+
+channels:
+  cvchannel:
+    orderers:
+      - orderer.certverification.com
+    peers:
+      peer0.CPA.certverification.com:
+        endorsingPeer: true
+        chaincodeQuery: true
+        ledgerQuery: true
+        eventSource: true
+
+      peer1.CPA.certverification.com:
+        endorsingPeer: false
+        chaincodeQuery: true
+        ledgerQuery: true
+        eventSource: false
+
+      peer0.verifier.certverification.com:
+        endorsingPeer: true
+        chaincodeQuery: true
+        ledgerQuery: true
+        eventSource: true
+
+      peer1.verifier.certverification.com:
+        endorsingPeer: false
+        chaincodeQuery: true
+        ledgerQuery: true
+        eventSource: false
+    chaincodes:
+      - certcc:v0
+      - certccc:v0
+
+
+organizations:
+  CPA:
+    mspid: CPAMSP
+
+    peers:
+      - peer0.CPA.certverification.com
+      - peer1.CPA.certverification.com
+    certificateAuthorities:
+      - ca-cpa
+    adminPrivateKey:
+      path: ../crypto-config/peerOrganizations/CPA.certverification.com/users/Admin@CPA.certverification.com/msp/keystore/d67147603994f90b81c68f1f7910dc7d16d0eb6f5bc3e46c90681d1f785082c0_sk
+    signedCert:
+      path: ../crypto-config/peerOrganizations/CPA.certverification.com/users/Admin@CPA.certverification.com/msp/signcerts/Admin@CPA.certverification.com-cert.pem
+
+  Verifier:
+    mspid: VerifierMSP
+    peers:
+      - peer0.verifier.certverification.com
+      - peer1.verifier.certverification.com
+    certificateAuthorities:
+      - ca-verifier
+    adminPrivateKey:
+      path: ../crypto-config/peerOrganizations/verifier.certverification.com/users/Admin@verifier.certverification.com/msp/keystore/d943a133caff8cafa7ed794afac0ae9c28349de9af03cffc20aae9d4dd52927e_sk
+    signedCert:
+      path: ../crypto-config/peerOrganizations/verifier.certverification.com/users/Admin@verifier.certverification.com/msp/signcerts/Admin@verifier.certverification.com-cert.pem
+
+orderers:
+  orderer.certverification.com:
+    url: grpcs://localhost:7050
+    grpcOptions:
+      ssl-target-name-override: orderer.certverification.com
+    tlsCACerts:
+      path: ../crypto-config/ordererOrganizations/certverification.com/orderers/orderer.certverification.com/tls/ca.crt
+
+peers:
+  peer0.CPA.certverification.com:
+    url: grpcs://localhost:7051
+
+    grpcOptions:
+      ssl-target-name-override: peer0.CPA.certverification.com
+    tlsCACerts:
+      path: ../crypto-config/peerOrganizations/CPA.certverification.com/peers/peer0.CPA.certverification.com/tls/ca.crt
+
+  peer1.CPA.certverification.com:
+    url: grpcs://localhost:8051
+    grpcOptions:
+      ssl-target-name-override: peer1.CPA.certverification.com
+    tlsCACerts:
+      path: ../crypto-config/peerOrganizations/CPA.certverification.com/peers/peer1.CPA.certverification.com/tls/ca.crt
+
+  peer0.verifier.certverification.com:
+    url: grpcs://localhost:9051
+    grpcOptions:
+      ssl-target-name-override: peer0.verifier.certverification.com
+    tlsCACerts:
+      path: ../crypto-config/peerOrganizations/verifier.certverification.com/peers/peer0.verifier.certverification.com/tls/ca.crt
+
+  peer1.verifier.certverification.com:
+    url: grpcs://localhost:10051
+    grpcOptions:
+      ssl-target-name-override: peer1.verifier.certverification.com
+    tlsCACerts:
+      path: ../crypto-config/peerOrganizations/verifier.certverification.com/peers/peer1.verifier.certverification.com/tls/ca.crt
+
+certificateAuthorities:
+  ca-cpa:
+    url: https://localhost:7054
+    httpOptions:
+      verify: false
+    tlsCACerts:
+      path: ../crypto-config/peerOrganizations/CPA.certverification.com/ca/ca.CPA.certverification.com-cert.pem
+
+    registrar:
+      - enrollId: admin
+        enrollSecret: adminpw
+    caName: ca-cpa
+
+  ca-verifier:
+    url: https://localhost:8054
+    httpOptions:
+      verify: false
+    tlsCACerts:
+      path: ../../crypto-config/peerOrganizations/verifier.certverification.com/ca/ca.verifier.certverification.com-cert.pem
+    registrar:
+      - enrollId: admin
+        enrollSecret: adminpw
+    caName: ca-verifier

@@ -1,0 +1,47 @@
+<div class="row">
+    <div class="col-xs-12 col-md-6 col-md-offset-3">
+
+        <br>
+        <br>
+        <br>
+
+        <form>
+
+
+
+        <div class="form-group">
+                <label for="number">Certificate Number</label>
+                <input type="text" class="form-control"  [(ngModel)]="id" name="id" />
+        </div>
+
+
+
+            <div>
+                <button class="btn btn-primary" (click)="verify()">Submit</button> <br>
+            </div>
+
+
+            <br>
+            <br>
+            
+
+            </form>
+
+
+            <div>
+                <span> Certificate Details </span><br>
+                <br>
+            </div>
+            <div>
+                <span>Name: {{this.detailss.name}}</span><br><br>
+                <span>Age:{{detailss.age}}</span><br><br>
+                <span>Email:{{detailss.email}}</span><br><br>
+                <span>Provider: {{detailss.provider}}</span><br><br>
+                <span>Owner: {{detailss.owner}}</span><br><br>
+                <span>Type: {{detailss.type}}</span><br><br>
+            </div>
+
+          
+            
+
+    </div></div>

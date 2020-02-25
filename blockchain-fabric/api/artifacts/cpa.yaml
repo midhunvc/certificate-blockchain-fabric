@@ -1,0 +1,19 @@
+---
+name: "certificationverification-cpa"
+
+x-type: "hlfv1"
+
+description: "Certification Verification Management Network - client definition for CPA"
+
+version: "1.0"
+
+client:
+  organization: CPA
+
+  credentialStore:
+    path: "./fabric-client-kv-cpa"
+
+    cryptoStore:
+      path: "/tmp/fabric-client-kv-cpa"
+
+    wallet: wallet-name
